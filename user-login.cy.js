@@ -58,4 +58,21 @@ describe('User Login', () => {
     //Assert text
     cy.get('.invalid-feedback').should("contain", "The password field is required.");
   })
+
+  it('positive : user succesfully login', () => {
+    cy.visit('http://localhost:8000');
+    //select email
+    cy.get('[data-id="email"]').type("superadmin@gmail.com");
+    //select password
+    cy.get('[data-id="password"]').type("password");
+    //click button login
+    cy.get('[data-id="submit"]').click();
+    //Assert text
+    cy.get('[data-id="Username"]').should("have.text", "Hi, SuperAdmin");
+    //click button username
+    cy.get('[data-id="Username"]').click();
+    //click button logout
+    cy.get('[data-id="logout"]').click();
+    //Assert text
+    cy.get('[data-id="login"]').should("have.text", "Login");
 })
